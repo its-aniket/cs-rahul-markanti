@@ -157,11 +157,22 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("[contact API]", err);
-    return NextResponse.json(
-      { error: "Failed to send message. Please try again or contact us directly." },
-      { status: 500 }
-    );
+    // Log the full error so it shows up in Vercel Function logs
+    const errorDetail = err instanceof Error
+      ? { message: err.message, code: (err as NodeJS.ErrnoException).code, stack: err.stack }
+      : String(err);
+    console.error("[contact API] SMTP error:", JSON.stringify(errorDetail, null, 2));
+
+    // Surface a helpful message for known failure types
+    const code = (err as NodeJS.ErrnoException).code;
+    let userMessage = "Failed to send message. Please try again or contact us directly.";
+    if (code === "ECONNRESET" || code === "ETIMEDOUT" || code === "ECONNREFUSED") {
+      userMessage = "Mail server connection failed. Please contact us directly at enquiry@csrahulmarkanti.com";
+    } else if (code === "EAUTH") {
+      userMessage = "Mail server authentication failed. Please contact us directly at enquiry@csrahulmarkanti.com";
+    }
+
+    return NextResponse.json({ error: userMessage }, { status: 500 });
   }
 }
 
