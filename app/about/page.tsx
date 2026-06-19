@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Rahul Markanti & Associates — a professional firm of Company Secretaries providing compliance, legal advisory, and secretarial services.",
-};
+    "Learn about Rahul Markanti & Associates — a professional firm of Company Secretaries empowering businesses with reliable, practical, and timely corporate compliance and advisory services.",
+  };
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
@@ -20,16 +20,16 @@ const areasOfPractice = [
 ];
 
 const visionChecklist = [
-  "Build long-term professional relationships based on trust and integrity",
-  "Deliver accurate, timely, and efficient compliance services",
-  "Support businesses in achieving sustainable and compliant growth",
-  "Promote strong corporate governance and ethical business practices",
+  "Build long-term professional relationships based on trust and integrity.",
+  "Deliver accurate, timely, and efficient compliance services.",
+  "Support businesses in achieving sustainable and compliant growth.",
+  "Promote strong corporate governance and ethical business practices.",
 ];
 
 const missionStats = [
   { value: "11+", label: "Service Categories" },
   { value: "2", label: "Office Locations" },
-  { value: "MH", label: "Maharashtra Presence" },
+  { value: "IN", label: "Pan India Presence" },
   { value: "ICSI", label: "Regulated Practice" },
 ];
 
@@ -145,8 +145,7 @@ export default function AboutPage() {
             About Rahul Markanti &amp; Associates
           </h1>
           <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-            A professional firm of Company Secretaries committed to delivering
-            reliable, practical, and timely compliance and advisory solutions.
+            Empowering businesses with reliable, practical, and timely corporate compliance and advisory services.
           </p>
         </div>
       </section>

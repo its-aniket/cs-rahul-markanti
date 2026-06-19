@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle } from "lucide-react";
+
+type FormState = "idle" | "sending" | "success" | "error";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -11,7 +13,8 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -19,10 +22,39 @@ export default function ContactPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // In production, connect to a form endpoint / email service
-    setSubmitted(true);
+    setFormState("sending");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error ?? "Something went wrong.");
+      }
+
+      setFormState("success");
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err) {
+      setFormState("error");
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : "Failed to send message. Please try again."
+      );
+    }
+  }
+
+  function handleReset() {
+    setFormState("idle");
+    setErrorMsg("");
   }
 
   return (
@@ -47,33 +79,54 @@ export default function ContactPage() {
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+
             {/* Form — 3 cols */}
             <div className="lg:col-span-3 bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
               <h2 className="font-serif text-2xl font-bold text-[#1B2A4A] mb-6">
                 Send Us a Message
               </h2>
 
-              {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-[#C8972B]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Send className="w-7 h-7 text-[#C8972B]" />
+              {/* ── Success state ── */}
+              {formState === "success" && (
+                <div className="flex flex-col items-center text-center py-10">
+                  <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
                   </div>
                   <h3 className="font-serif text-xl font-bold text-[#1B2A4A] mb-2">
-                    Message Received!
+                    Message Sent!
                   </h3>
-                  <p className="text-gray-500 text-sm">
-                    Thank you for reaching out. We&apos;ll get back to you within 24
-                    business hours.
+                  <p className="text-gray-500 text-sm max-w-sm mb-6">
+                    Thank you for reaching out. We&apos;ve sent a confirmation to your email
+                    and will get back to you within 1–2 business days.
                   </p>
                   <button
-                    onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", subject: "", message: "" }); }}
-                    className="mt-6 px-6 py-2.5 bg-[#1B2A4A] text-white text-sm font-bold rounded hover:bg-[#243660] transition-colors"
+                    onClick={handleReset}
+                    className="px-6 py-2.5 bg-[#1B2A4A] text-white text-sm font-bold rounded hover:bg-[#243660] transition-colors"
                   >
-                    Send Another
+                    Send Another Message
                   </button>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+              )}
+
+              {/* ── Error banner ── */}
+              {formState === "error" && (
+                <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4 mb-5">
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-red-700 text-sm font-medium">{errorMsg}</p>
+                    <button
+                      onClick={handleReset}
+                      className="text-red-500 text-xs underline mt-1"
+                    >
+                      Try again
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ── Form ── */}
+              {formState !== "success" && (
+                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -104,6 +157,7 @@ export default function ContactPage() {
                       />
                     </div>
                   </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -120,7 +174,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Subject <span className="text-red-500">*</span>
+                        Service <span className="text-red-500">*</span>
                       </label>
                       <select
                         name="subject"
@@ -135,7 +189,7 @@ export default function ContactPage() {
                         <option>MCA Compliance</option>
                         <option>Income Tax</option>
                         <option>TDS Compliance</option>
-                        <option>Labour Law & Compliance</option>
+                        <option>Labour Law &amp; Compliance</option>
                         <option>Startup Advisory</option>
                         <option>NGO / Section 8</option>
                         <option>Other Registrations</option>
@@ -145,6 +199,7 @@ export default function ContactPage() {
                       </select>
                     </div>
                   </div>
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
                       Message <span className="text-red-500">*</span>
@@ -159,12 +214,26 @@ export default function ContactPage() {
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8972B]/40 focus:border-[#C8972B] resize-none"
                     />
                   </div>
+
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#C8972B] text-white font-bold rounded hover:bg-[#b07a1e] transition-colors"
+                    disabled={formState === "sending"}
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#C8972B] text-white font-bold rounded hover:bg-[#b07a1e] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-4 h-4" />
-                    Send Message
+                    {formState === "sending" ? (
+                      <>
+                        <svg className="w-4 h-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                        </svg>
+                        Sending…
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Message
+                      </>
+                    )}
                   </button>
                 </form>
               )}
@@ -172,6 +241,7 @@ export default function ContactPage() {
 
             {/* Info — 2 cols */}
             <div className="lg:col-span-2 space-y-6">
+
               {/* Contact details */}
               <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-5">
                 <h2 className="font-serif text-xl font-bold text-[#1B2A4A]">
@@ -190,8 +260,8 @@ export default function ContactPage() {
                   <Mail className="w-5 h-5 text-[#C8972B] shrink-0 mt-0.5" />
                   <div>
                     <p className="text-xs text-gray-400 mb-0.5 font-medium">Email</p>
-                    <a href="mailto:csrahulmarkanti@gmail.com" className="text-[#1B2A4A] font-semibold hover:text-[#C8972B] text-sm break-all">
-                      csrahulmarkanti@gmail.com
+                    <a href="mailto:enquiry@csrahulmarkanti.com" className="text-[#1B2A4A] font-semibold hover:text-[#C8972B] text-sm break-all">
+                      enquiry@csrahulmarkanti.com
                     </a>
                   </div>
                 </div>
@@ -206,55 +276,32 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Pune Office */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <MapPin className="w-5 h-5 text-[#C8972B]" />
-                  <h3 className="font-serif font-bold text-[#1B2A4A]">
-                    Pune – Registered Office
-                  </h3>
+              {/* WhatsApp CTA */}
+              <a
+                href="https://wa.me/918830383872?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-[#25D366] text-white rounded-2xl px-6 py-4 hover:opacity-90 transition-opacity shadow-sm"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="fill-white flex-shrink-0" aria-hidden>
+                  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
+                </svg>
+                <div>
+                  <p className="font-bold text-sm leading-tight">Chat on WhatsApp</p>
+                  <p className="text-white/80 text-xs mt-0.5">Quick response during working hours</p>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  SR No 54/2A/A/1, Guruprasad, Behind Star Prestige,
-                  Near Hotel Dawat, Wadgaon BK, Pune – 411041
+              </a>
+
+              {/* ICSI disclaimer note */}
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <p className="text-xs text-amber-800 leading-relaxed">
+                  <span className="font-semibold">Note:</span> Submitting this form does not create a
+                  Professional-client relationship. Information shared is for enquiry purposes only
+                  and is subject to our Terms &amp; Conditions.
                 </p>
               </div>
 
-              {/* Solapur Office */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <MapPin className="w-5 h-5 text-[#C8972B]" />
-                  <h3 className="font-serif font-bold text-[#1B2A4A]">
-                    Solapur – Branch Office
-                  </h3>
-                </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Office No 8, Ramchandra Empire, Opp. Old Walchand College,
-                  Solapur – 413006
-                </p>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Google Maps Embed – Pune Office */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <h2 className="font-serif text-2xl font-bold text-[#1B2A4A] mb-6">
-            Find Us – Pune Office
-          </h2>
-          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-80">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.1073894!2d73.8!3d18.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zV2FkZ2FvbiBCaywgUHVuZSAtIDQxMTA0MQ!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Pune Office Location"
-            />
           </div>
         </div>
       </section>

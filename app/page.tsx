@@ -26,9 +26,9 @@ const heroEnquiries = [
 
 const stats = [
   { value: "11+", label: "Service Categories" },
-  { value: "2", label: "Office Locations" },
-  { value: "Pune & Solapur", label: "Maharashtra" },
-  { value: "Startups to Corporates", label: "Clients Served" },
+  { value: "PAN India", label: "Client Reach" },
+  { value: "Global", label: "International Advisory" },
+  { value: "ICSI", label: "Regulated Practice" },
 ];
 
 const services = [
@@ -186,7 +186,8 @@ export default function HomePage() {
               {/* Eyebrow badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#C8972B]/20 border border-[#C8972B]/40 rounded-full text-[#C8972B] text-xs font-semibold uppercase tracking-widest mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C8972B]" />
-                Company Secretaries · ICSI Regulated
+                Company Secretaries
+                <span className="hidden sm:inline"> | </span> CS Rahul Markanti
               </div>
 
               {/* Headline — Georgia serif */}
@@ -199,8 +200,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
-                Helping startups, MSMEs, and businesses across Pune and Solapur
-                navigate regulatory compliance with accuracy and confidence.
+                Helping startups, MSMEs, and businesses across India and abroad navigate regulatory compliance with accuracy and confidence.
               </p>
 
               {/* CTAs */}
@@ -221,7 +221,7 @@ export default function HomePage() {
 
               {/* Trust badges */}
               <div className="flex flex-wrap gap-x-6 gap-y-2">
-                {["ICSI Regulated Practice", "Pune & Solapur Offices", "Mon–Sat, 10AM–6PM"].map((b) => (
+                {["Regulated Practice", "PAN India & International", "Mon–Sat, 10AM–6PM"].map((b) => (
                   <div key={b} className="flex items-center gap-1.5 text-gray-400 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#C8972B] flex-shrink-0" aria-hidden><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
                     {b}
@@ -258,8 +258,8 @@ export default function HomePage() {
                     +91 88303 83872
                   </a>
                   <span className="text-white/20">·</span>
-                  <a href="mailto:csrahulmarkanti@gmail.com" className="text-gray-300 text-sm hover:text-white transition-colors truncate">
-                    csrahulmarkanti@gmail.com
+                  <a href="mailto:enquiry@csrahulmarkanti.com" className="text-gray-300 text-sm hover:text-white transition-colors truncate">
+                    enquiry@csrahulmarkanti.com
                   </a>
                 </div>
               </div>
@@ -299,7 +299,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
             <p className="text-[#C8972B] text-xs sm:text-sm font-semibold uppercase tracking-widest mb-2">
-              What We Do
+            
             </p>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#1B2A4A] mb-3">
               Our Services
@@ -357,7 +357,7 @@ export default function HomePage() {
               <p className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base">
                 Rahul Markanti &amp; Associates is a professional firm of Company Secretaries dedicated to
                 providing comprehensive legal, secretarial, and compliance advisory services to startups,
-                entrepreneurs, corporates, and business organizations. Our approach is built on integrity,
+                entrepreneurs, corporates, and business organizations across India and internationally. Our approach is built on integrity,
                 transparency, professionalism, and client-centric service delivery.
               </p>
               <Link
@@ -384,85 +384,6 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════
           SECTION 5 — OFFICES (navy)
       ══════════════════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 bg-[#1B2A4A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-12">
-            <p className="text-[#C8972B] text-xs sm:text-sm font-semibold uppercase tracking-widest mb-2">
-              Locations
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              Our Offices
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-5 sm:gap-8 max-w-4xl mx-auto">
-            {/* Pune */}
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#C8972B]/40 transition-colors">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-lg bg-[#C8972B] flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-[#C8972B] text-xs font-semibold uppercase tracking-wide">Registered Office</p>
-                  <p className="text-white font-serif font-bold text-base sm:text-lg">Pune</p>
-                </div>
-              </div>
-              <address className="not-italic text-gray-300 text-sm leading-relaxed mb-5">
-                SR No 54/2A/A/1, Guruprasad,<br />
-                Behind Star Prestige, Near Hotel Dawat,<br />
-                Wadgaon BK, Pune – 411041, Maharashtra
-              </address>
-              <div className="space-y-2 mb-5">
-                <a href="tel:+918830383872" className="flex items-center gap-2 text-gray-300 text-sm hover:text-[#C8972B] transition-colors">
-                  <Phone className="w-4 h-4 text-[#C8972B]" /> +91 88303 83872
-                </a>
-                <a href="mailto:csrahulmarkanti@gmail.com" className="flex items-center gap-2 text-gray-300 text-sm hover:text-[#C8972B] transition-colors">
-                  <Mail className="w-4 h-4 text-[#C8972B]" /> csrahulmarkanti@gmail.com
-                </a>
-              </div>
-              <a
-                href="https://maps.google.com/?q=Wadgaon+BK+Pune+411041"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#C8972B] text-white text-sm font-semibold rounded-lg hover:bg-[#b07a1e] transition-colors"
-              >
-                Get Directions <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-            {/* Solapur */}
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#C8972B]/40 transition-colors">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-lg bg-[#C8972B] flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-[#C8972B] text-xs font-semibold uppercase tracking-wide">Branch Office</p>
-                  <p className="text-white font-serif font-bold text-base sm:text-lg">Solapur</p>
-                </div>
-              </div>
-              <address className="not-italic text-gray-300 text-sm leading-relaxed mb-5">
-                Office No 8, Ramchandra Empire,<br />
-                Opp. Old Walchand College,<br />
-                Solapur – 413006, Maharashtra
-              </address>
-              <div className="space-y-2 mb-5">
-                <a href="tel:+918830383872" className="flex items-center gap-2 text-gray-300 text-sm hover:text-[#C8972B] transition-colors">
-                  <Phone className="w-4 h-4 text-[#C8972B]" /> +91 88303 83872
-                </a>
-              </div>
-              <a
-                href="https://maps.google.com/?q=Old+Walchand+College+Solapur+413006"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#C8972B] text-white text-sm font-semibold rounded-lg hover:bg-[#b07a1e] transition-colors"
-              >
-                Get Directions <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════
           SECTION 6 — COMPLIANCE PREVIEW

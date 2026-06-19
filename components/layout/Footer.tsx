@@ -15,7 +15,7 @@ export default function Footer() {
                 
                 <div>
                   <div className="text-white font-serif font-bold text-sm leading-tight">
-                   C.S. Rahul Markanti &amp; Associates
+                   C.S. Rahul Markanti And Associates
                   </div>
                   <div className="text-[#C8972B] text-[9px] uppercase tracking-widest font-medium">
                     Company Secretaries
@@ -78,30 +78,6 @@ export default function Footer() {
                 Contact Us
               </h3>
               <div className="space-y-4">
-                <div>
-                  <p className="text-[#C8972B] text-xs font-semibold uppercase tracking-wide mb-1">
-                    Pune – Registered Office
-                  </p>
-                  <div className="flex items-start gap-2 text-sm text-gray-400">
-                    <MapPin className="w-4 h-4 text-[#C8972B] shrink-0 mt-0.5" />
-                    <p>
-                      SR No 54/2A/A/1, Guruprasad, Behind Star Prestige, Near Hotel
-                      Dawat, Wadgaon BK, Pune – 411041
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[#C8972B] text-xs font-semibold uppercase tracking-wide mb-1">
-                    Solapur – Branch Office
-                  </p>
-                  <div className="flex items-start gap-2 text-sm text-gray-400">
-                    <MapPin className="w-4 h-4 text-[#C8972B] shrink-0 mt-0.5" />
-                    <p>
-                      Office No 8, Ramchandra Empire, Opp. Old Walchand College,
-                      Solapur – 413006
-                    </p>
-                  </div>
-                </div>
                 <a
                   href="tel:+918830383872"
                   className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#C8972B] transition-colors"
@@ -110,11 +86,11 @@ export default function Footer() {
                   +91 88303 83872
                 </a>
                 <a
-                  href="mailto:csrahulmarkanti@gmail.com"
+                  href="mailto:enquiry@csrahulmarkanti.com"
                   className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#C8972B] transition-colors"
                 >
                   <Mail className="w-4 h-4 text-[#C8972B]" />
-                  csrahulmarkanti@gmail.com
+                  enquiry@csrahulmarkanti.com
                 </a>
               </div>
             </div>
@@ -126,7 +102,7 @@ export default function Footer() {
       <div className="bg-[#111e33] py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-gray-500 text-xs leading-relaxed mb-3">
-            <span className="font-semibold text-gray-400">ICSI Disclaimer: </span>
+            <span className="font-semibold text-gray-400">Disclaimer: </span>
             This website has been designed only for the purposes of dissemination of
             basic information on Rahul Markanti &amp; Associates. The information
             provided is solely available at your request and for informational
