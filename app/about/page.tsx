@@ -28,7 +28,7 @@ const visionChecklist = [
 
 const missionStats = [
   { value: "11+", label: "Service Categories" },
-  { value: "2", label: "Office Locations" },
+  { value: "1", label: "Office Locations" },
   { value: "IN", label: "Pan India Presence" },
   { value: "ICSI", label: "Regulated Practice" },
 ];
@@ -142,10 +142,10 @@ export default function AboutPage() {
             The Firm
           </p>
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-5">
-            About Rahul Markanti &amp; Associates
+            Rahul Markanti &amp; Associates
           </h1>
           <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-            Empowering businesses with reliable, practical, and timely corporate compliance and advisory services.
+            EMPOWERING BUSINESSES WITH RELIABLE, PRACTICAL, AND TIMELY CORPORATE COMPLIANCE AND ADVISORY SERVICES.
           </p>
         </div>
       </section>

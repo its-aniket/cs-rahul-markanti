@@ -58,7 +58,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <div>
               <div className="text-white font-serif font-bold text-sm md:text-base leading-tight">
-               C. S. Rahul Markanti And Associates
+               CS. Rahul Markanti And Associates
               </div>
               <div className="text-[#C8972B] text-[9px] md:text-[10px] uppercase tracking-widest font-medium">
                 Company Secretaries

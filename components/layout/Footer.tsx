@@ -15,7 +15,7 @@ export default function Footer() {
                 
                 <div>
                   <div className="text-white font-serif font-bold text-sm leading-tight">
-                   C.S. Rahul Markanti And Associates
+                   CS. Rahul Markanti And Associates
                   </div>
                   <div className="text-[#C8972B] text-[9px] uppercase tracking-widest font-medium">
                     Company Secretaries
@@ -78,6 +78,10 @@ export default function Footer() {
                 Contact Us
               </h3>
               <div className="space-y-4">
+                <div className="flex items-start gap-2 text-sm text-gray-400">
+                  <MapPin className="w-4 h-4 text-[#C8972B] shrink-0 mt-0.5" />
+                  <span>SR No 54/2A/A/1, Guruprasad, Behind Star Prestige, Near Hotel Dawat, Wadgaon BK, Pune – 411041</span>
+                </div>
                 <a
                   href="tel:+918830383872"
                   className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#C8972B] transition-colors"

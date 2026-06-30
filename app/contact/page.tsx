@@ -305,6 +305,43 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      {/* Google Maps */}
+      <section className="bg-gray-50 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <h2 className="font-serif text-2xl font-bold text-[#1B2A4A] mb-1">
+              Our Location
+            </h2>
+            <p className="text-gray-500 text-sm flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-[#C8972B] shrink-0" />
+              SR No 54/2A/A/1, Guruprasad, Behind Star Prestige, Near Hotel Dawat, Wadgaon BK, Pune – 411041
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-80 md:h-96">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.8!2d73.8220!3d18.4855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfc08b4cd2df%3A0x!2sWadgaon+BK%2C+Pune%2C+Maharashtra+411041!5e0!3m2!1sen!2sin!4v1720000000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Rahul Markanti & Associates — Pune Office"
+            />
+          </div>
+          <div className="mt-4 text-center">
+            <a
+              href="https://maps.google.com/?q=SR+No+54/2A/A/1+Guruprasad+Wadgaon+BK+Pune+411041"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1B2A4A] text-white text-sm font-semibold rounded-lg hover:bg-[#243a64] transition-colors"
+            >
+              <MapPin className="w-4 h-4" />
+              Get Directions on Google Maps
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
