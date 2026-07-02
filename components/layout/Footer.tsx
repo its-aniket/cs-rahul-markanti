@@ -15,7 +15,7 @@ export default function Footer() {
                 
                 <div>
                   <div className="text-white font-serif font-bold text-sm leading-tight">
-                   CS. Rahul Markanti And Associates
+                   CS Rahul Markanti And Associates
                   </div>
                   <div className="text-[#C8972B] text-[9px] uppercase tracking-widest font-medium">
                     Company Secretaries
